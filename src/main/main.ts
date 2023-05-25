@@ -81,8 +81,18 @@ const createWindow = async () => {
     },
   });
 
+  mainWindow.webContents.session.setPermissionRequestHandler(
+    (webContents, permission, callback) => {
+      callback(true);
+    }
+  );
+  mainWindow.webContents.session.setPermissionCheckHandler(() => {
+    return true;
+  });
+
   mainWindow.loadURL('https://videocall.agora.io/room?rid=SKIBTG', {
-    userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36"
+    userAgent:
+      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36',
   });
 
   mainWindow.on('ready-to-show', () => {
